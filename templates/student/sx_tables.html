@@ -1,0 +1,160 @@
+{% extends 'student/tables.html' %}
+{% load static %}
+{% block title %}
+    <title>个人信息</title>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="dataTable_filter" class="dataTables_filter" style="text-align: right">
+                搜索：<label>
+                <input type="search" class="form-control form-control-sm"
+                       placeholder="" aria-controls="dataTable">
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-uppercase mb-0">必修</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover card-text">
+                        <thead>
+                        <tr class="thead">
+                            <th>课程号</th>
+                            <th>课序号</th>
+                            <th>课程名</th>
+                            <th>英文课程名</th>
+                            <th>学分</th>
+                            <th>课程属性</th>
+                            <th>成绩</th>
+                            <th>未通过原因</th>
+                        </tr>
+                        </thead>
+                        {% for bx in bx_list %}
+                            <tr>
+                                <td>{{ bx.课程号 }}</td>
+                                <td>{{ bx.课序号 }}</td>
+                                <td>{{ bx.课程名 }}</td>
+                                <td>{{ bx.英文课程名 }}</td>
+                                <td>{{ bx.学分 }}</td>
+                                <td>{{ bx.课程属性 }}</td>
+                                <td>{{ bx.成绩 }}</td>
+                                <td>{{ bx.考试时间 }}</td>
+                                <td>{{ bx.未通过原因 }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr align="center">
+                                <td colspan="8"><span style="font-weight: bolder">暂无数据</span></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-uppercase mb-0">选修</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover card-text">
+                        <thead>
+                        <tr class="thead">
+                            <th>课程号</th>
+                            <th>课序号</th>
+                            <th>课程名</th>
+                            <th>英文课程名</th>
+                            <th>学分</th>
+                            <th>课程属性</th>
+                            <th>成绩</th>
+                            <th>未通过原因</th>
+                        </tr>
+                        </thead>
+                        {% for xx in xx_list %}
+                            <tr>
+                                <td>{{ xx.课程号 }}</td>
+                                <td>{{ xx.课序号 }}</td>
+                                <td>{{ xx.课程名 }}</td>
+                                <td>{{ xx.英文课程名 }}</td>
+                                <td>{{ xx.学分 }}</td>
+                                <td>{{ xx.课程属性 }}</td>
+                                <td>{{ xx.成绩 }}</td>
+                                <td>{{ xx.未通过原因 }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr align="center">
+                                <td colspan="8"><span style="font-weight: bolder">暂无数据</span></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-uppercase mb-0">任选</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover card-text">
+                        <thead>
+                        <tr class="thead">
+                            <th>课程号</th>
+                            <th>课序号</th>
+                            <th>课程名</th>
+                            <th>英文课程名</th>
+                            <th>学分</th>
+                            <th>课程属性</th>
+                            <th>成绩</th>
+                            <th>未通过原因</th>
+                        </tr>
+                        </thead>
+                        {% for rx in rx_list %}
+                            <tr>
+                                <td>{{ rx.课程号 }}</td>
+                                <td>{{ rx.课序号 }}</td>
+                                <td>{{ rx.课程名 }}</td>
+                                <td>{{ rx.英文课程名 }}</td>
+                                <td>{{ rx.学分 }}</td>
+                                <td>{{ rx.课程属性 }}</td>
+                                <td>{{ rx.成绩 }}</td>
+                                <td>{{ rx.未通过原因 }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr align="center">
+                                <td colspan="8"><span style="font-weight: bolder">暂无数据</span></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        tr = $('tbody > tr');
+        function filter_tr() {
+            let key = $(this).val();
+            tr.each(function () {
+                $(this).css('display', 'table-row')
+            });
+            tr.removeClass('showed');
+            tr.show();
+            tr.children('td:contains("'+key+'")').parent().addClass('showed');
+            tr.each(function () {
+                if(!$(this).hasClass('showed')){
+                    $(this).css('display', 'none')
+                }
+            });
+        }
+        let search_input = $('input[type=search]');
+        search_input.bind("input propertychange",filter_tr);
+        $('span:contains("成绩查询")').parent().addClass('active')
+            .parent().siblings().children('a').removeClass('active');
+    </script>
+{% endblock %}

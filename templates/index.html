@@ -1,0 +1,390 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    {% block title %}
+        <title>主页</title>
+    {% endblock %}
+    <!-- meta-tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}?3">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //meta-tags -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <!-- font-awesome -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<!-- header -->
+<div class="header-top">
+    <div class="container">
+        <div class="bottom_header_left">
+            <p>
+                <span class="fa fa-map-marker" aria-hidden="true"></span>中北大学, 山西太原
+            </p>
+        </div>
+        <div class="bottom_header_right">
+            <div class="header-top-righ">
+                <a href="{% url 'student:login' %}">
+                    <span class="fa fa-sign-out" aria-hidden="true"></span>学生登录</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="header">
+    <div class="content white">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <h1>
+                            <span class="fa fa-leanpub" aria-hidden="true"></span>成绩分析系统
+                            <label>导入分析 & 学生个人分析</label>
+                        </h1>
+                    </a>
+                </div>
+                <!--/.navbar-header-->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <nav class="link-effect-2" id="link-effect-2">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="{% url 'analysis:index' %}" class="effect-3">主页</a>
+                            </li>
+                            <li>
+                                <a href="https://ca.nuc.edu.cn/zfca/login?service=http%3A%2F%2Fi.nuc.edu.cn%2Fportal.do"
+                                   class="effect-3" target="_blank">个人门户</a>
+                            </li>
+                            <li>
+                                <a href="http://202.207.177.39:8089/logout.do"
+                                   target="_blank" class="effect-3">URP综合教务</a>
+                            </li>
+                            <li>
+                                <a href="http://www.nuc.edu.cn/zjzb/mlzb.htm"
+                                   class="effect-3" target="_blank">校园美景</a>
+                            </li>
+                            <li>
+                                <a href="http://www.nuc.edu.cn/"
+                                   class="effect-3" target="_blank">中北官网</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--/.navbar-collapse-->
+                <!--/.navbar-->
+            </div>
+        </nav>
+    </div>
+</div>
+{% block content %}
+    <!-- banner -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+            <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h6>欢迎使用 成绩分析系统(中北大学)</h6>
+                        <h3>夜
+                            <span>在中北</span>
+                        </h3>
+                        <p>中北夜景</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item item2">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h6>欢迎使用 成绩分析系统(中北大学)</h6>
+                        <h3>夏
+                            <span>在中北</span>
+                        </h3>
+                        <p>夏季·柏林园</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item item3">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h6>欢迎使用 成绩分析系统(中北大学)</h6>
+                        <h3>秋
+                            <span>在中北</span>
+                        </h3>
+                        <p>秋季·益足道</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item item4">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h6>欢迎使用 成绩分析系统(中北大学)</h6>
+                        <h3>冬
+                            <span>在中北</span>
+                        </h3>
+                        <p>冬季·二龙山长亭</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="fa fa-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="fa fa-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!-- The Modal -->
+    </div>
+    <!-- about -->
+    <div class="banner-bottom-w3l" id="about">
+        <div class="container">
+            <div class="title-div">
+                <h3 class="tittle">
+                    <span>W</span>elcome
+                </h3>
+                <div class="tittle-style">
+
+                </div>
+            </div>
+            <div class="welcome-sub-wthree">
+                <div class="col-md-6 banner_bottom_left">
+                    <h4>关于
+                        <span>中北</span>
+                    </h4>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中北大学是一所由山西省人民政府与国家国防科技工业局共建、山西省人民政府管理的多科性教学研究型大学。
+                        学校的前身是1941年八路军总司令部在太行抗日根据地创办的我党我军第一所兵工学校——太行工业学校，
+                        先后隶属于八路军总司令部、重工业部兵工总局 、第二机械工业部、第一机械工业部、第三机械工业部、国防科委、
+                        第五机械工业部、兵器工业部 、兵器工业总公司 、机械电子工业部 、中国兵器工业总公司、国防科工委，
+                        历经太原机械学院、华北工学院，2004年6月经教育部批准更名为中北大学。</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建校78年来，中北大学不忘初心、牢记使命，铸魂军工、根植三晋，在长期办学实践中形成了“太行精神”红色基因和
+                        “致知于行”校训，造就了开拓创新、敢为人先、追求卓越的独特精神气质和文化内核，引领着学校始终登高望远、
+                        砥砺前行。迈进新时代，学校在科教强国和军民融合战略背景下，贯彻落实国家“双一流”建设部署，坚持“以学生为中心”
+                        的办学理念，以“争一流、强特色”为目标，实施“两翼齐飞、内涵发展、综合改革、人才强校、国际化”五大重点发展战略，
+                        为建设高水平教学研究型大学、实现“百年百强”中北梦而努力奋斗！</p>
+                </div>
+                <!-- //Stats -->
+                <div class="col-md-6 stats-info-agile">
+                    <div class="col-xs-6 stats-grid stat-border">
+                        <div class="numscroller numscroller-big-bottom roller-title-number-1 scrollzip isShown"
+                             data-slno="1" data-min="0" data-max="16" data-delay=".5" data-increment="1">16
+                        </div>
+                        <p>Faculties</p>
+                    </div>
+                    <div class="col-xs-6 stats-grid">
+                        <div class="numscroller numscroller-big-bottom roller-title-number-2 scrollzip isShown"
+                             data-slno="2" data-min="0" data-max="678" data-delay=".5" data-increment="1">85
+                        </div>
+                        <p>Undergraduate Programs</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="child-stat">
+                        <div class="col-xs-6 stats-grid stat-border border-st2">
+                            <div class="numscroller numscroller-big-bottom roller-title-number-3 scrollzip isShown"
+                                 data-slno="3" data-min="0" data-max="800" data-delay=".5" data-increment="1">2660
+                            </div>
+                            <p>Certified Teachers</p>
+                        </div>
+                        <div class="col-xs-6 stats-grid">
+                            <div class="numscroller numscroller-big-bottom roller-title-number-4 scrollzip isShown"
+                                 data-slno="4" data-min="0" data-max="485" data-delay=".5" data-increment="1">39000
+                            </div>
+                            <p>Happy Students</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!-- news -->
+    <div class="news" id="news">
+        <div class="container">
+            <div class="title-div">
+                <h3 class="tittle">
+                    <span>O</span>ur
+                    <span> E</span>vents
+                </h3>
+                <div class="tittle-style">
+
+                </div>
+            </div>
+            <div class="yaallahaa-news-grids-agile">
+                <div class="yaallahaa-news-grid">
+                    <div class="col-md-6 yaallahaa-news-left">
+                        <div class="col-xs-6 news-left-img">
+                            <div class="news-left-text color-event1">
+                                <h5>05-24</h5>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                            <div class="news-left-top-text text-color1">
+                                <a href="#" target="_blank" class="news-title">我校组织党外代表人士赴华侨大学培训学习</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-6 yaallahaa-news-left">
+                        <div class="col-xs-6 news-left-img news-left-img1">
+                            <div class="news-left-text color-event2">
+                                <h5>05-24</h5>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                            <div class="news-left-top-text text-color2">
+                                <a href="#" target="_blank" class="news-title">副校长赵贵哲赴成都电子科技大学调研研究生培养工作</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="yaallahaa-news-grid">
+                    <div class="col-md-6 yaallahaa-news-left">
+                        <div class="col-xs-6 news-left-img news-left-img2">
+                            <div class="news-left-text color-event3">
+                                <h5>05-23</h5>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                            <div class="news-left-top-text text-color3">
+                                <a href="#" target="_blank" class="news-title">我校学生参加中国（山西）高校传媒联盟2019精英峰会并斩获多项荣誉</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-6 yaallahaa-news-left">
+                        <div class="col-xs-6 news-left-img news-left-img3">
+                            <div class="news-left-text color-event4">
+                                <h5>05-22</h5>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                            <div class="news-left-top-text text-color4">
+                                <a href="#" target="_blank" class="news-title">校党委书记李忠人到信息与通信工程学院调研</a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- footer -->
+<div class="mkl_footer">
+    <div class="footer-copy-right">
+        <div class="container">
+            <div>
+                <p>Copyright &copy; 2019.成绩分析系统
+                    <a href="http://www.nuc.edu.cn" target="_blank" title="中北大学">中北大学</a>
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--/footer -->
+{% block js %}
+    <!-- js -->
+    <script src="{% static 'vendor/jquery/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/numscroller-1.0.js' %}"></script>
+    <script>
+        $(window).load(function () {
+            $("#flexiselDemo1").flexisel({
+                visibleItems: 1,
+                animationSpeed: 1000,
+                autoPlay: false,
+                autoPlaySpeed: 3000,
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 1
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 1
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="{% static 'vendor/jquery/jquery.flexisel.js' %}"></script>
+    <script src="{% static 'js/SmoothScroll.min.js' %}"></script>
+    <script src="{% static 'js/move-top.js' %}"></script>
+    <script src="{% static 'js/easing.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+            $.ajax({
+                type: "get",
+                url: "{% url 'analysis:get_news' %}",
+                cache: true,
+                async: true,
+                success: function (result) {
+                    if (result['status']) {
+                        $('h5').each(function (i, ele) {
+                            $(this).html(result['news'][i].date);
+                            {#$(this).parent().parent().next().children('div a')#}
+                            {#    .attr('href', result['news'][i].url)#}
+                            {#    .html(result['news'][i].title);#}
+                            $('a.news-title:eq(' + i + ')').attr('href', result['news'][i].url).html(result['news'][i].title)
+                        })
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+</body>
+
+</html>

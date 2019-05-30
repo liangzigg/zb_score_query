@@ -1,0 +1,121 @@
+{% extends 'student/tables.html' %}
+{% load static %}
+{% block title %}
+    <title>个人信息</title>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="dataTable_filter" class="dataTables_filter" style="text-align: right">
+                搜索：<label>
+                <input type="search" class="form-control form-control-sm"
+                       placeholder="" aria-controls="dataTable">
+            </label>
+            </div>
+        </div>
+        {% for term in term_list %}
+            <div class="col-lg-6 mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        {% if term.0.学期 == '学期_0' %}
+                            <h6 class="text-uppercase mb-0">大一上学期</h6>
+                        {% elif term.0.学期 == '学期_1' %}
+                            <h6 class="text-uppercase mb-0">大一下学期</h6>
+                        {% elif term.0.学期 == '学期_2' %}
+                            <h6 class="text-uppercase mb-0">大二上学期</h6>
+                        {% elif term.0.学期 == '学期_3' %}
+                            <h6 class="text-uppercase mb-0">大二下学期</h6>
+                        {% elif term.0.学期 == '学期_4' %}
+                            <h6 class="text-uppercase mb-0">大三上学期</h6>
+                        {% elif term.0.学期 == '学期_5' %}
+                            <h6 class="text-uppercase mb-0">大三下学期</h6>
+                        {% elif term.0.学期 == '学期_6' %}
+                            <h6 class="text-uppercase mb-0">大四上学期</h6>
+                        {% elif term.0.学期 == '学期_7' %}
+                            <h6 class="text-uppercase mb-0">大四下学期</h6>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover card-text">
+                            <thead>
+                            <tr class="thead">
+                                <th>课程号</th>
+                                <th>课序号</th>
+                                <th>课程名</th>
+                                <th>英文课程名</th>
+                                <th>学分</th>
+                                <th>课程属性</th>
+                                <th>成绩</th>
+                            </tr>
+                            </thead>
+                            {% for tr in term %}
+                                <tr>
+                                    <td>{{ tr.课程号 }}</td>
+                                    <td>{{ tr.课序号 }}</td>
+                                    <td>{{ tr.课程名 }}</td>
+                                    <td>{{ tr.英文课程名 }}</td>
+                                    <td>{{ tr.学分 }}</td>
+                                    <td>{{ tr.课程属性 }}</td>
+                                    <td>{{ tr.成绩 }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr align="center">
+                                    <td colspan="7"><span style="font-weight: bolder">暂无数据</span></td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="7">
+                                    {% if forloop.counter0 == 0 %}
+                                        {{ total_list.0.数据 }}
+                                    {% elif forloop.counter0 == 1 %}
+                                        {{ total_list.1.数据 }}
+                                    {% elif forloop.counter0 == 2 %}
+                                        {{ total_list.2.数据 }}
+                                    {% elif forloop.counter0 == 3 %}
+                                        {{ total_list.3.数据 }}
+                                    {% elif forloop.counter0 == 4 %}
+                                        {{ total_list.4.数据 }}
+                                    {% elif forloop.counter0 == 5 %}
+                                        {{ total_list.5.数据 }}
+                                    {% elif forloop.counter0 == 6 %}
+                                        {{ total_list.6.数据 }}
+                                    {% elif forloop.counter0 == 7 %}
+                                        {{ total_list.7.数据 }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+        tr = $('tbody > tr');
+
+        function filter_tr() {
+            let key = $(this).val();
+            tr.each(function () {
+                $(this).css('display', 'table-row')
+            });
+            tr.removeClass('showed');
+            tr.show();
+            tr.children('td:contains("' + key + '")').parent().addClass('showed');
+            tr.each(function () {
+                if (!$(this).hasClass('showed')) {
+                    $(this).css('display', 'none')
+                }
+            });
+        }
+
+        let search_input = $('input[type=search]');
+        search_input.bind("input propertychange", filter_tr);
+        $('span:contains("成绩查询")').parent().addClass('active')
+            .parent().siblings().children('a').removeClass('active');
+    </script>
+{% endblock %}

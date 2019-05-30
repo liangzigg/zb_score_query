@@ -1,0 +1,80 @@
+{% extends 'student/tables.html' %}
+
+{% block title %}
+    <title>个人信息</title>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-uppercase mb-0">基本信息</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover card-text">
+                        {% for k, v in base_info.items %}
+                            <tr>
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr align="center">
+                                <td colspan="4"><span style="font-weight: bolder">获取信息失败</span></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-uppercase mb-0">在校信息</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover card-text">
+                        {% for k, v in school_info.items %}
+                            <tr>
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr align="center">
+                                <td colspan="4"><span style="font-weight: bolder">获取信息失败</span></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-uppercase mb-0">毕业信息</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover card-text">
+                        {% for k, v in graduation_info.items %}
+                            <tr>
+                                <td>{{ k }}</td>
+                                <td>{{ v }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr align="center">
+                                <td colspan="4"><span style="font-weight: bolder">获取信息失败</span></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $('span:contains("个人信息")').parent().addClass('active')
+            .parent().siblings().children('a').removeClass('active');
+    </script>
+{% endblock %}

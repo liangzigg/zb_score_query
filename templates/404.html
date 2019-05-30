@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    <title>404 - 资源未找到</title>
+{% endblock %}
+
+{% block content %}
+    <div style="height: 550px;">
+        <h1 align="center" style="margin-top: 200px;">糟糕，您要的资源未找到 ~_~ </h1>
+        <h3 align="center"><a href="{% url 'analysis:index' %}">返回主页</a></h3>
+    </div>
+{% endblock %}
