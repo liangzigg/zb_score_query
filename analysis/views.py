@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic.base import View
 
-from utils.tools import get_news
+from spider.spider import get_news
 
 
 class Index(View):

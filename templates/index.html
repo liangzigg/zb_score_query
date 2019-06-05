@@ -28,23 +28,23 @@
 
 <body>
 <!-- header -->
-<div class="header-top">
-    <div class="container">
-        <div class="bottom_header_left">
-            <p>
-                <span class="fa fa-map-marker" aria-hidden="true"></span>中北大学, 山西太原
-            </p>
-        </div>
-        <div class="bottom_header_right">
-            <div class="header-top-righ">
-                <a href="{% url 'student:login' %}">
-                    <span class="fa fa-sign-out" aria-hidden="true"></span>学生登录</a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
+{#<div class="header-top">#}
+{#    <div class="container">#}
+{#        <div class="bottom_header_left">#}
+{#            <p>#}
+{#                <span class="fa fa-map-marker" aria-hidden="true"></span>中北大学, 山西太原#}
+{#            </p>#}
+{#        </div>#}
+{#        <div class="bottom_header_right">#}
+{#            <div class="header-top-righ">#}
+{#                <a href="{% url 'student:login' %}">#}
+{#                    <span class="fa fa-sign-out" aria-hidden="true"></span>学生登录</a>#}
+{#            </div>#}
+{#            <div class="clearfix"></div>#}
+{#        </div>#}
+{#        <div class="clearfix"></div>#}
+{#    </div>#}
+{#</div>#}
 <div class="header">
     <div class="content white">
         <nav class="navbar navbar-default">
@@ -68,30 +68,34 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <nav class="link-effect-2" id="link-effect-2">
                         <ul class="nav navbar-nav">
-                            <li class="active">
+                            <li class="pull-right">
+                                <a href="{% url 'student:login' %}" class="effect-3">
+                                    <span class="fa fa-sign-out" aria-hidden="true"></span>学生登录
+                                </a>
+                            </li>
+                            <li class="active pull-right">
                                 <a href="{% url 'analysis:index' %}" class="effect-3">主页</a>
                             </li>
-                            <li>
-                                <a href="https://ca.nuc.edu.cn/zfca/login?service=http%3A%2F%2Fi.nuc.edu.cn%2Fportal.do"
-                                   class="effect-3" target="_blank">个人门户</a>
-                            </li>
-                            <li>
-                                <a href="http://202.207.177.39:8089/logout.do"
-                                   target="_blank" class="effect-3">URP综合教务</a>
-                            </li>
-                            <li>
-                                <a href="http://www.nuc.edu.cn/zjzb/mlzb.htm"
-                                   class="effect-3" target="_blank">校园美景</a>
-                            </li>
-                            <li>
-                                <a href="http://www.nuc.edu.cn/"
-                                   class="effect-3" target="_blank">中北官网</a>
-                            </li>
+
+                            {#                            <li>#}
+                            {#                                <a href="https://ca.nuc.edu.cn/zfca/login?service=http%3A%2F%2Fi.nuc.edu.cn%2Fportal.do"#}
+                            {#                                   class="effect-3" target="_blank">个人门户</a>#}
+                            {#                            </li>#}
+                            {#                            <li>#}
+                            {#                                <a href="http://202.207.177.39:8089/logout.do"#}
+                            {#                                   target="_blank" class="effect-3">URP综合教务</a>#}
+                            {#                            </li>#}
+                            {#                            <li>#}
+                            {#                                <a href="http://www.nuc.edu.cn/zjzb/mlzb.htm"#}
+                            {#                                   class="effect-3" target="_blank">校园美景</a>#}
+                            {#                            </li>#}
+                            {#                            <li>#}
+                            {#                                <a href="http://www.nuc.edu.cn/"#}
+                            {#                                   class="effect-3" target="_blank">中北官网</a>#}
+                            {#                            </li>#}
                         </ul>
                     </nav>
                 </div>
-                <!--/.navbar-collapse-->
-                <!--/.navbar-->
             </div>
         </nav>
     </div>

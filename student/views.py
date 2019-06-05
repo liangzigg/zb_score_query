@@ -10,7 +10,11 @@ from pymongo import MongoClient
 
 from celery_tasks.tasks import get_jg_score, get_bjg_score, get_sx_score
 from utils.charts import json_response, charts
-from utils.tools import get_cookies, get_info, process_info, get_point
+from utils.tools import get_point
+from spider.spider import get_cookies, get_info
+from process.process import process_info
+
+from .models import User
 
 
 class Login(View):
@@ -23,21 +27,27 @@ class Login(View):
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
-        cookies = get_cookies(username, password)
-        if not cookies:
-            return JsonResponse({'status': False, 'msg': '登录失败!'})
+        try:
+            user = User.objects.get(username=username)
+            request.session['username'] = user.username
+            return JsonResponse({'status': True, 'url': reverse('student:personal')})
+        except User.DoesNotExist:
+            cookies = get_cookies(username, password)
+            if not cookies:
+                return JsonResponse({'status': False, 'msg': '登录失败!'})
         key = 'u' + username
-        jg = list(self.client.jg[key].find({"类型": {"$regex": '学期.*'}}))
-        bjg = list(self.client.bjg[key].find({"类型": {"$regex": ".*bjg"}}))
-        sx = list(self.client.sx[key].find({"类型": {"$regex": "sx.*"}}))
+        user = User.objects.create(username=username, password=password, mg_key=key)
+        jg = list(self.client.jg[user.mg_key].find({"学期": {"$regex": '学期.*'}}))
+        bjg = list(self.client.bjg[user.mg_key].find({"类型": {"$regex": ".*bjg"}}))
+        sx = list(self.client.sx[user.mg_key].find({"类型": {"$regex": "sx.*"}}))
         if not jg:
-            get_jg_score.delay(username, cookies)
+            get_jg_score.delay(user.username, cookies)
         if not bjg:
-            get_bjg_score.delay(username, cookies)
+            get_bjg_score.delay(user.username, cookies)
         if not sx:
-            get_sx_score.delay(username, cookies)
+            get_sx_score.delay(user.username, cookies)
         request.session['cookies'] = cookies
-        request.session['username'] = username
+        request.session['username'] = user.username
         return JsonResponse({'status': True, 'url': reverse('student:personal')})
 
 
@@ -126,11 +136,13 @@ class GPA(View):
 
     def get(self, request):
         key = 'u' + request.session.get('username')
-        # key = 'u' + '1509044144'
         school = request.GET.get('mode')
         result = get_point(key, self.client, school)
         if school is None:
-            return render(request, 'student/gpa.html', {'current_point': result})
+            return render(
+                request, 'student/gpa.html',
+                {'current_point': result['error_message'] if isinstance(result, dict) else result}
+            )
         return JsonResponse({'status': True, 'point': result})
 
 
@@ -143,7 +155,6 @@ class Charts(View):
 
     def post(self, request):
         key = 'u' + request.session.get('username')
-        # key = 'u1509044144'
         return json_response(json.loads(charts(key)))
 
 
@@ -156,12 +167,13 @@ class ExportExcel(View):
         key = 'u' + request.session.get('username')
         school = request.GET.get('mode')
         point = get_point(key, self.client, school)
-        # key = 'u' + request.session.get('username')
+
         jg_score = list(self.client.jg[key].find({'学期': {'$regex': '学期.*'}}))  # 查询及格成绩
         bjg_score = list(self.client.bjg[key].find({'类型': 'sbjg'}))  # 查询尚不及格成绩
         if not jg_score:
             return JsonResponse({'status': False, 'msg': '暂无数据可进行导出!'})
         jg_score.extend(bjg_score)
+
         # 设置HTTPResponse的类型
         response = HttpResponse(content_type='application/vnd.ms-excel')
         response['Content-Disposition'] = 'attachment;filename=report.xls'

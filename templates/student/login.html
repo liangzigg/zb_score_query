@@ -89,8 +89,13 @@
         sub.html('登录中...').attr('disabled', 'true');
         let username = $('input[name=username]').val();
         let password = $('input[name=password]').val();
+        if (username.length === 0 || password.length === 0) {
+            $('h6.error-message').css('display', 'block').html('请将信息填写完整!');
+            sub.html('登录');
+            return false
+        }
         if (username.length !== 10 || password.length < 6) {
-            $('h6.error-message').css('display', 'block');
+            $('h6.error-message').css('display', 'block').html('用户名或密码错误!');
             sub.html('登录');
             return false
         }

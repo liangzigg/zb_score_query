@@ -2,7 +2,6 @@ import json
 
 from django.conf import settings
 from django.http import HttpResponse
-from example.commons import Faker
 from pyecharts.charts import Line
 from pyecharts import options as opts
 from pymongo import MongoClient
@@ -63,11 +62,12 @@ def get_term_point(score_dict):
 
 
 def charts(key) -> Line:
+    """绘图"""
     client = MongoClient(settings.MG_HOST, settings.MG_PORT)
     db = client.jg
     terms = list(db[key].aggregate([{'$group': {'_id': '$学期'}}]))
     line_dict = dict()
-    for i in range(len(terms)-1):
+    for i in range(len(terms) - 1):
         term = '学期_' + str(i)
         scores = list(db[key].find({'学期': term}))
         line_dict[term] = scores
@@ -76,7 +76,7 @@ def charts(key) -> Line:
     c = (
         Line()
             .add_xaxis([k for k, v in result.items()])
-            .add_yaxis("绩点", [v for k,v in result.items()])
+            .add_yaxis("绩点", [v for k, v in result.items()])
             .set_global_opts(title_opts=opts.TitleOpts(title="绩点折线图"))
             .dump_options()
     )

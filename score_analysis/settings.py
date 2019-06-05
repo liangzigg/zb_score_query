@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'score_analysis.mymiddleware.CheckStatus'
+    'score_analysis.mymiddleware.CheckStatus'
 ]
 
 ROOT_URLCONF = 'score_analysis.urls'

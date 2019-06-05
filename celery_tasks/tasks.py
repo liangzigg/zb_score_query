@@ -6,10 +6,8 @@ from celery import Celery
 from lxml import etree
 from retry import retry
 
-from utils.tools import Processor
+from process.process import Processor
 
-
-# 配置django环境
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "score_analysis.settings")
 django.setup()
 
@@ -23,7 +21,6 @@ from django.conf import settings
 
 # 创建celery 对象
 app = Celery('celery_tasks.tasks', broker='redis://127.0.0.1:6379/5')
-
 
 HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',

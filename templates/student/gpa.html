@@ -35,6 +35,7 @@
                                 <td>
                                     <label for="mode"></label>
                                     <select name="algorithm_mode" id="mode">
+                                        <option value="zb">中北</option>
                                         <option value="bz">标准4.0</option>
                                         <option value="gj">改进4.0</option>
                                         <option value="gj2">改进(2)4.0</option>
@@ -339,6 +340,15 @@
                                 <td>0</td>
                             </tr>
                         </table>
+                        <table class="table card-text" id="zb">
+                            <tr><td colspan="2" align="center">平均学分绩点=∑(课程绩点×课程学分)/∑课程学分</td></tr>
+                            <tr><th>课程绩点计算办法：</th><th></th></tr>
+                            <tr><th colspan="2">百分制记分：</th></tr>
+                            <tr><td colspan="2">课程成绩不足60分的绩点为0,超过60分的(包含60分)的算法为：</td></tr>
+                            <tr><td colspan="2" align="center">课程绩点=课程成绩/10-5(保留一位小数)</td></tr>
+                            <tr><th colspan="2">五分制记分：</th></tr>
+                            <tr><td colspan="2">优秀：4.5绩点；良好：3.5绩点；中等：2.5绩点；及格：1.5绩点；不及格：0绩点；</td></tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -349,7 +359,7 @@
 
 {% block js %}
     <script type="text/javascript">
-        $('table#bz').show().siblings().hide();
+        $('table#zb').show().siblings().hide();
         $('select#mode').change(function () {
             let mode = $(this).val();
             $('table#' + mode + '').show().siblings().hide();
